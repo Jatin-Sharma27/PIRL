@@ -1,0 +1,289 @@
+=== cartpole: LQR ===
+  -> {"success_rate": 0.1, "nominal_success": false, "nominal_t_up": null, "mean_t_up": 0.07, "nominal_cost": 25.112702635156126, "mean_cost": 22.23641987267608, "mean_abs_u": 0.9016945373252083, "saturation_frac": 0.9005833333333333, "ms_per_step": 0.14594901666714577, "train_wall_s": 0.004432201385498047}
+=== cartpole: Energy+LQR ===
+  -> {"success_rate": 1.0, "nominal_success": true, "nominal_t_up": 2.68, "mean_t_up": 2.247, "nominal_cost": 4.228657531409469, "mean_cost": 3.4006622456045976, "mean_abs_u": 0.12416037729048647, "saturation_frac": 0.060833333333333336, "ms_per_step": 0.16001522500058246, "train_wall_s": 0.0}
+=== cartpole: MPPI-MPC ===
+  -> {"success_rate": 1.0, "nominal_success": true, "nominal_t_up": 2.8000000000000003, "mean_t_up": 2.329, "nominal_cost": 4.940506130361191, "mean_cost": 3.1614363101739875, "mean_abs_u": 0.4611371728840968, "saturation_frac": 0.009, "ms_per_step": 10.910058658333583, "train_wall_s": 0.40823888778686523}
+=== cartpole: Explicit-MPC ===
+=== cartpole: MPPI-MPC ===
+  -> {"success_rate": 1.0, "nominal_success": true, "nominal_t_up": 2.8000000000000003, "mean_t_up": 2.329, "nominal_cost": 4.940506130361191, "mean_cost": 3.1614363101739875, "mean_abs_u": 0.4611371728840968, "saturation_frac": 0.009, "ms_per_step": 6.830446299999797, "train_wall_s": 0.42589712142944336}
+=== cartpole: Explicit-MPC ===
+  MPPI data step 0
+  MPPI data step 50
+  MPPI data step 100
+  MPPI data step 150
+  MPPI data step 200
+  MPPI data step 250
+  MPPI data step 300
+  MPPI data step 350
+  explicit-MPC fit it 0: mse=0.3776
+  explicit-MPC fit it 2000: mse=0.2596
+  explicit-MPC fit it 4000: mse=0.2539
+  explicit-MPC fit it 6000: mse=0.2587
+  -> {"success_rate": 1.0, "nominal_success": true, "nominal_t_up": 3.84, "mean_t_up": 2.021, "nominal_cost": 6.128515890700922, "mean_cost": 3.00186161949411, "mean_abs_u": 0.06710635661324584, "saturation_frac": 0.0, "ms_per_step": 0.30529403333396965, "train_wall_s": 716.7900238037109}
+=== cartpole: XTFC-PI ===
+  XTFC-PI 0: rms residual=6.065e-01  |dbeta|/|beta|=1.000e+00
+  XTFC-PI 1: rms residual=4.539e-01  |dbeta|/|beta|=8.695e-01
+  XTFC-PI 2: rms residual=4.317e-01  |dbeta|/|beta|=3.642e-01
+  XTFC-PI 3: rms residual=4.199e-01  |dbeta|/|beta|=3.163e-01
+  XTFC-PI 4: rms residual=4.117e-01  |dbeta|/|beta|=2.828e-01
+  XTFC-PI 5: rms residual=4.069e-01  |dbeta|/|beta|=3.073e-01
+  XTFC-PI 6: rms residual=4.040e-01  |dbeta|/|beta|=2.804e-01
+  XTFC-PI 7: rms residual=4.011e-01  |dbeta|/|beta|=2.885e-01
+  XTFC-PI 8: rms residual=4.001e-01  |dbeta|/|beta|=2.814e-01
+  XTFC-PI 9: rms residual=3.971e-01  |dbeta|/|beta|=2.616e-01
+  XTFC-PI 10: rms residual=3.967e-01  |dbeta|/|beta|=2.734e-01
+  XTFC-PI 11: rms residual=3.943e-01  |dbeta|/|beta|=2.748e-01
+  -> {"success_rate": 0.0, "nominal_success": false, "nominal_t_up": null, "mean_t_up": null, "nominal_cost": null, "mean_cost": null, "mean_abs_u": 0.7763792319661266, "saturation_frac": 0.6169166666666667, "ms_per_step": 0.5732338833331596, "train_wall_s": 5063.452000141144}
+=== cartpole: XTFC-PIRL ===
+  XTFC-PIRL 0: rms residual=4.950e-01  |dbeta|/|beta|=1.000e+00
+  XTFC-PIRL 1: rms residual=4.325e-01  |dbeta|/|beta|=9.661e-01
+  XTFC-PIRL 2: rms residual=4.369e-01  |dbeta|/|beta|=4.523e-01
+  XTFC-PIRL 3: rms residual=4.349e-01  |dbeta|/|beta|=4.137e-01
+  XTFC-PIRL 4: rms residual=4.185e-01  |dbeta|/|beta|=3.774e-01
+  XTFC-PIRL 5: rms residual=4.141e-01  |dbeta|/|beta|=3.579e-01
+  XTFC-PIRL 6: rms residual=4.117e-01  |dbeta|/|beta|=3.465e-01
+  XTFC-PIRL 7: rms residual=4.145e-01  |dbeta|/|beta|=3.540e-01
+  XTFC-PIRL 8: rms residual=4.223e-01  |dbeta|/|beta|=3.763e-01
+  XTFC-PIRL 9: rms residual=4.337e-01  |dbeta|/|beta|=3.740e-01
+  XTFC-PIRL 10: rms residual=4.492e-01  |dbeta|/|beta|=4.267e-01
+  XTFC-PIRL 11: rms residual=4.375e-01  |dbeta|/|beta|=3.781e-01
+  -> {"success_rate": 0.0, "nominal_success": false, "nominal_t_up": null, "mean_t_up": null, "nominal_cost": null, "mean_cost": 12.190977755444006, "mean_abs_u": 0.9560424668579885, "saturation_frac": 0.9305, "ms_per_step": 0.5785079000003559, "train_wall_s": 252.7083477973938}
+=== cartpole: PIRL ===
+  PIRL(lam=0.1) PI 0: IRL residual^2=2.721e-02  samples=64814
+  PIRL(lam=0.1) PI 1: IRL residual^2=1.652e-02  samples=52190
+  PIRL(lam=0.1) PI 2: IRL residual^2=1.144e-02  samples=51615
+  PIRL(lam=0.1) PI 3: IRL residual^2=7.562e-03  samples=51245
+  PIRL(lam=0.1) PI 4: IRL residual^2=5.986e-03  samples=51919
+  PIRL(lam=0.1) PI 5: IRL residual^2=4.927e-03  samples=51606
+  PIRL(lam=0.1) PI 6: IRL residual^2=4.692e-03  samples=51734
+  PIRL(lam=0.1) PI 7: IRL residual^2=3.853e-03  samples=51637
+  PIRL(lam=0.1) PI 8: IRL residual^2=3.837e-03  samples=52892
+  PIRL(lam=0.1) PI 9: IRL residual^2=3.493e-03  samples=52441
+  -> {"success_rate": 0.95, "nominal_success": true, "nominal_t_up": 1.98, "mean_t_up": 1.4189473684210527, "nominal_cost": 3.7693522340997556, "mean_cost": 2.439162500320511, "mean_abs_u": 0.8679113466452497, "saturation_frac": 0.7529166666666667, "ms_per_step": 0.6158197333328037, "train_wall_s": 1372.9143550395966}
+=== cartpole: IRL (no physics) ===
+  PIRL(lam=0.0) PI 0: IRL residual^2=1.738e-02  samples=64814
+  PIRL(lam=0.0) PI 1: IRL residual^2=5.968e-03  samples=65207
+  PIRL(lam=0.0) PI 2: IRL residual^2=3.409e-03  samples=67349
+  PIRL(lam=0.0) PI 3: IRL residual^2=3.473e-03  samples=67752
+  PIRL(lam=0.0) PI 4: IRL residual^2=2.528e-03  samples=68175
+  PIRL(lam=0.0) PI 5: IRL residual^2=2.229e-03  samples=67913
+  PIRL(lam=0.0) PI 6: IRL residual^2=2.096e-03  samples=68155
+  PIRL(lam=0.0) PI 7: IRL residual^2=2.080e-03  samples=67449
+  PIRL(lam=0.0) PI 8: IRL residual^2=2.959e-03  samples=67022
+  PIRL(lam=0.0) PI 9: IRL residual^2=3.674e-03  samples=66224
+  -> {"success_rate": 0.0, "nominal_success": false, "nominal_t_up": null, "mean_t_up": null, "nominal_cost": null, "mean_cost": null, "mean_abs_u": 0.9959690624090533, "saturation_frac": 0.9924166666666666, "ms_per_step": 0.5892992250010138, "train_wall_s": 454.2665538787842}
+=== cartpole: PINN-AC ===
+  BC of Energy+LQR: mse=0.0199
+  PINN-AC PI 0: PE residual^2=3.962e-01  mean H=-0.518
+  PINN-AC PI 1: PE residual^2=1.247e-01  mean H=0.198
+  PINN-AC PI 2: PE residual^2=9.733e-02  mean H=0.211
+  PINN-AC PI 3: PE residual^2=6.875e-02  mean H=0.195
+  PINN-AC PI 4: PE residual^2=5.725e-02  mean H=0.222
+  PINN-AC PI 5: PE residual^2=3.890e-02  mean H=0.214
+  PINN-AC PI 6: PE residual^2=3.680e-02  mean H=0.228
+  PINN-AC PI 7: PE residual^2=3.905e-02  mean H=0.216
+  PINN-AC PI 8: PE residual^2=3.969e-02  mean H=0.219
+  PINN-AC PI 9: PE residual^2=3.255e-02  mean H=0.218
+  PINN-AC PI 10: PE residual^2=3.738e-02  mean H=0.230
+  PINN-AC PI 11: PE residual^2=3.536e-02  mean H=0.190
+  -> {"success_rate": 0.0, "nominal_success": false, "nominal_t_up": null, "mean_t_up": null, "nominal_cost": null, "mean_cost": 17.185608093403967, "mean_abs_u": 0.6024328238051676, "saturation_frac": 0.17616666666666667, "ms_per_step": 0.25795362500017893, "train_wall_s": 902.8203139305115}
+=== cartpole: PINN-HJB ===
+  PINN-HJB it 0: residual^2=5.111e+00
+  PINN-HJB it 1000: residual^2=1.516e-01
+  PINN-HJB it 2000: residual^2=1.166e-01
+  PINN-HJB it 3000: residual^2=6.529e-02
+  PINN-HJB it 4000: residual^2=4.527e-02
+  PINN-HJB it 5000: residual^2=3.112e-02
+  PINN-HJB it 6000: residual^2=2.702e-02
+  PINN-HJB it 7000: residual^2=2.090e-02
+  PINN-HJB it 8000: residual^2=1.386e-02
+  PINN-HJB it 9000: residual^2=1.258e-02
+  PINN-HJB it 10000: residual^2=9.521e-03
+  PINN-HJB it 11000: residual^2=8.736e-03
+  PINN-HJB it 12000: residual^2=8.237e-03
+  PINN-HJB it 13000: residual^2=8.165e-03
+  PINN-HJB it 14000: residual^2=7.128e-03
+  PINN-HJB it 15000: residual^2=6.226e-03
+  PINN-HJB it 16000: residual^2=6.232e-03
+  PINN-HJB it 17000: residual^2=5.899e-03
+  PINN-HJB it 18000: residual^2=6.125e-03
+  PINN-HJB it 19000: residual^2=5.548e-03
+  -> {"success_rate": 0.0, "nominal_success": false, "nominal_t_up": null, "mean_t_up": null, "nominal_cost": null, "mean_cost": null, "mean_abs_u": 0.9993584602971872, "saturation_frac": 0.999, "ms_per_step": 0.5925251166663656, "train_wall_s": 834.5295054912567}
+=== cartpole: LQR ===
+  -> {"success_rate": 0.1, "nominal_success": false, "nominal_t_up": null, "mean_t_up": 0.07, "nominal_cost": 25.112702635156126, "mean_cost": 22.23641987267608, "mean_abs_u": 0.9016945373252083, "saturation_frac": 0.9005833333333333, "ms_per_step": 0.11934465000013006, "train_wall_s": 0.04907083511352539}
+=== cartpole: XTFC-PI ===
+  XTFC-PI 0: rms residual=7.186e-01  |dbeta|/|beta|=1.000e+00
+  XTFC-PI 1: rms residual=5.667e-01  |dbeta|/|beta|=6.881e-01
+  XTFC-PI 2: rms residual=5.426e-01  |dbeta|/|beta|=2.922e-01
+  XTFC-PI 3: rms residual=5.289e-01  |dbeta|/|beta|=2.685e-01
+  XTFC-PI 4: rms residual=5.233e-01  |dbeta|/|beta|=2.587e-01
+  XTFC-PI 5: rms residual=5.179e-01  |dbeta|/|beta|=2.576e-01
+  XTFC-PI 6: rms residual=5.175e-01  |dbeta|/|beta|=2.344e-01
+  XTFC-PI 7: rms residual=5.157e-01  |dbeta|/|beta|=2.406e-01
+  XTFC-PI 8: rms residual=5.152e-01  |dbeta|/|beta|=2.420e-01
+=== cartpole: XTFC-PI ===
+  XTFC-PI 0: rms residual=7.663e-01  |dbeta|/|beta|=1.000e+00
+  XTFC-PI 1: rms residual=6.208e-01  |dbeta|/|beta|=5.495e-01
+  XTFC-PI 2: rms residual=5.980e-01  |dbeta|/|beta|=2.554e-01
+  XTFC-PI 3: rms residual=5.872e-01  |dbeta|/|beta|=2.483e-01
+  XTFC-PI 4: rms residual=5.756e-01  |dbeta|/|beta|=2.210e-01
+  XTFC-PI 5: rms residual=5.705e-01  |dbeta|/|beta|=2.207e-01
+  XTFC-PI 6: rms residual=5.674e-01  |dbeta|/|beta|=2.091e-01
+  XTFC-PI 7: rms residual=5.689e-01  |dbeta|/|beta|=1.913e-01
+  XTFC-PI 8: rms residual=5.700e-01  |dbeta|/|beta|=2.019e-01
+  XTFC-PI 9: rms residual=5.657e-01  |dbeta|/|beta|=2.053e-01
+  XTFC-PI 10: rms residual=5.683e-01  |dbeta|/|beta|=2.028e-01
+  XTFC-PI 11: rms residual=5.605e-01  |dbeta|/|beta|=2.046e-01
+  -> {"success_rate": 0.0, "nominal_success": false, "nominal_t_up": null, "mean_t_up": null, "nominal_cost": 19.782746009385164, "mean_cost": 19.442903270629458, "mean_abs_u": 0.6791984594294908, "saturation_frac": 0.5230833333333333, "ms_per_step": 1.2412360999999996, "train_wall_s": 94.3310317993164}
+=== cartpole: XTFC-PIRL ===
+  XTFC-PIRL 0: rms residual=5.593e-01  |dbeta|/|beta|=1.000e+00
+  XTFC-PIRL 1: rms residual=4.925e-01  |dbeta|/|beta|=7.358e-01
+  XTFC-PIRL 2: rms residual=4.767e-01  |dbeta|/|beta|=3.678e-01
+  XTFC-PIRL 3: rms residual=4.697e-01  |dbeta|/|beta|=2.846e-01
+  XTFC-PIRL 4: rms residual=4.662e-01  |dbeta|/|beta|=2.892e-01
+  XTFC-PIRL 5: rms residual=4.659e-01  |dbeta|/|beta|=2.798e-01
+  XTFC-PIRL 6: rms residual=4.733e-01  |dbeta|/|beta|=2.495e-01
+  XTFC-PIRL 7: rms residual=4.733e-01  |dbeta|/|beta|=2.691e-01
+  XTFC-PIRL 8: rms residual=4.732e-01  |dbeta|/|beta|=2.656e-01
+  XTFC-PIRL 9: rms residual=4.643e-01  |dbeta|/|beta|=2.537e-01
+  XTFC-PIRL 10: rms residual=4.599e-01  |dbeta|/|beta|=2.719e-01
+  XTFC-PIRL 11: rms residual=4.600e-01  |dbeta|/|beta|=2.683e-01
+  -> {"success_rate": 0.2, "nominal_success": false, "nominal_t_up": null, "mean_t_up": 1.025, "nominal_cost": null, "mean_cost": 1.544358264012881, "mean_abs_u": 0.7264782325232706, "saturation_frac": 0.6215833333333334, "ms_per_step": 1.209736391666714, "train_wall_s": 176.48651123046875}
+=== cartpole: PIRL ===
+  PIRL(lam=0.1) PI 0: IRL residual^2=1.004e-01  samples=64814
+  PIRL(lam=0.1) PI 1: IRL residual^2=7.600e-02  samples=56138
+  PIRL(lam=0.1) PI 2: IRL residual^2=6.983e-02  samples=58712
+  PIRL(lam=0.1) PI 3: IRL residual^2=5.772e-02  samples=60251
+  PIRL(lam=0.1) PI 4: IRL residual^2=5.254e-02  samples=59468
+  PIRL(lam=0.1) PI 5: IRL residual^2=4.638e-02  samples=60155
+  PIRL(lam=0.1) PI 6: IRL residual^2=3.978e-02  samples=60739
+  PIRL(lam=0.1) PI 7: IRL residual^2=3.923e-02  samples=60425
+  PIRL(lam=0.1) PI 8: IRL residual^2=3.746e-02  samples=60824
+  PIRL(lam=0.1) PI 9: IRL residual^2=3.468e-02  samples=60428
+  -> {"success_rate": 0.0, "nominal_success": false, "nominal_t_up": null, "mean_t_up": null, "nominal_cost": 23.42319196800473, "mean_cost": 22.585657043275624, "mean_abs_u": 0.945191997227259, "saturation_frac": 0.9035833333333333, "ms_per_step": 1.1703344750009514, "train_wall_s": 2279.2707154750824}
+=== cartpole: XTFC-PIRL (no anchor) ===
+  XTFC-PIRL 0: rms residual=5.102e-01  |dbeta|/|beta|=1.000e+00
+  XTFC-PIRL 1: rms residual=4.497e-01  |dbeta|/|beta|=8.954e-01
+  XTFC-PIRL 2: rms residual=4.665e-01  |dbeta|/|beta|=4.135e-01
+  XTFC-PIRL 3: rms residual=4.436e-01  |dbeta|/|beta|=3.474e-01
+  XTFC-PIRL 4: rms residual=4.362e-01  |dbeta|/|beta|=3.429e-01
+  XTFC-PIRL 5: rms residual=4.231e-01  |dbeta|/|beta|=2.962e-01
+  XTFC-PIRL 6: rms residual=4.298e-01  |dbeta|/|beta|=2.800e-01
+  XTFC-PIRL 7: rms residual=4.307e-01  |dbeta|/|beta|=2.968e-01
+  XTFC-PIRL 8: rms residual=4.232e-01  |dbeta|/|beta|=2.967e-01
+  XTFC-PIRL 9: rms residual=4.275e-01  |dbeta|/|beta|=2.769e-01
+  XTFC-PIRL 10: rms residual=4.229e-01  |dbeta|/|beta|=3.065e-01
+  XTFC-PIRL 11: rms residual=4.223e-01  |dbeta|/|beta|=2.825e-01
+  -> {"success_rate": 0.0, "nominal_success": false, "nominal_t_up": null, "mean_t_up": null, "nominal_cost": null, "mean_cost": null, "mean_abs_u": 0.9472853449231984, "saturation_frac": 0.89925, "ms_per_step": 1.8207104416663547, "train_wall_s": 334.7154047489166}
+=== cartpole: PIRL (no anchor) ===
+  PIRL(lam=0.1) PI 0: IRL residual^2=2.721e-02  samples=64814
+  PIRL(lam=0.1) PI 1: IRL residual^2=1.652e-02  samples=52190
+  PIRL(lam=0.1) PI 2: IRL residual^2=1.144e-02  samples=51615
+  PIRL(lam=0.1) PI 3: IRL residual^2=7.562e-03  samples=51245
+  PIRL(lam=0.1) PI 4: IRL residual^2=5.986e-03  samples=51919
+  PIRL(lam=0.1) PI 5: IRL residual^2=4.927e-03  samples=51606
+  PIRL(lam=0.1) PI 6: IRL residual^2=4.692e-03  samples=51734
+  PIRL(lam=0.1) PI 7: IRL residual^2=3.853e-03  samples=51637
+  PIRL(lam=0.1) PI 8: IRL residual^2=3.837e-03  samples=52892
+=== cartpole: XTFC-PI ===
+  XTFC-PI 0: rms residual=7.984e-01  |dbeta|/|beta|=1.000e+00
+  XTFC-PI 1: rms residual=6.652e-01  |dbeta|/|beta|=5.385e-01
+  XTFC-PI 2: rms residual=6.426e-01  |dbeta|/|beta|=2.711e-01
+  XTFC-PI 3: rms residual=6.299e-01  |dbeta|/|beta|=2.564e-01
+  XTFC-PI 4: rms residual=6.184e-01  |dbeta|/|beta|=2.223e-01
+  XTFC-PI 5: rms residual=6.128e-01  |dbeta|/|beta|=2.355e-01
+  XTFC-PI 6: rms residual=6.121e-01  |dbeta|/|beta|=2.222e-01
+  XTFC-PI 7: rms residual=6.126e-01  |dbeta|/|beta|=2.090e-01
+  XTFC-PI 8: rms residual=6.133e-01  |dbeta|/|beta|=2.238e-01
+  XTFC-PI 9: rms residual=6.087e-01  |dbeta|/|beta|=2.282e-01
+  XTFC-PI 10: rms residual=6.129e-01  |dbeta|/|beta|=2.213e-01
+  XTFC-PI 11: rms residual=6.074e-01  |dbeta|/|beta|=2.248e-01
+  -> {"success_rate": 0.0, "nominal_success": false, "nominal_t_up": null, "mean_t_up": null, "nominal_cost": null, "mean_cost": 19.38363475317873, "mean_abs_u": 0.7109315641717718, "saturation_frac": 0.5199166666666667, "ms_per_step": 0.17014464574943605, "train_wall_s": 17.27127242088318}
+=== cartpole: XTFC-PIRL ===
+  XTFC-PIRL 0: rms residual=5.635e-01  |dbeta|/|beta|=1.000e+00
+  XTFC-PIRL 1: rms residual=4.893e-01  |dbeta|/|beta|=7.422e-01
+  XTFC-PIRL 2: rms residual=4.704e-01  |dbeta|/|beta|=3.508e-01
+  XTFC-PIRL 3: rms residual=4.687e-01  |dbeta|/|beta|=2.755e-01
+  XTFC-PIRL 4: rms residual=4.622e-01  |dbeta|/|beta|=2.733e-01
+  XTFC-PIRL 5: rms residual=4.602e-01  |dbeta|/|beta|=2.816e-01
+  XTFC-PIRL 6: rms residual=4.525e-01  |dbeta|/|beta|=2.643e-01
+  XTFC-PIRL 7: rms residual=4.491e-01  |dbeta|/|beta|=2.570e-01
+  XTFC-PIRL 8: rms residual=4.350e-01  |dbeta|/|beta|=2.560e-01
+  XTFC-PIRL 9: rms residual=4.224e-01  |dbeta|/|beta|=2.681e-01
+  XTFC-PIRL 10: rms residual=4.179e-01  |dbeta|/|beta|=2.634e-01
+  XTFC-PIRL 11: rms residual=4.032e-01  |dbeta|/|beta|=2.602e-01
+  -> {"success_rate": 0.1, "nominal_success": false, "nominal_t_up": null, "mean_t_up": 0.02, "nominal_cost": null, "mean_cost": 0.03165249185443757, "mean_abs_u": 0.6852496937824722, "saturation_frac": 0.5298333333333334, "ms_per_step": 0.17272100833361037, "train_wall_s": 25.599714756011963}
+=== cartpole: PIRL ===
+  PIRL(lam=0.1) PI 0: IRL residual^2=9.327e-02  samples=64814
+  PIRL(lam=0.1) PI 1: IRL residual^2=7.301e-02  samples=53996
+  PIRL(lam=0.1) PI 2: IRL residual^2=5.916e-02  samples=53620
+  PIRL(lam=0.1) PI 3: IRL residual^2=4.940e-02  samples=53633
+  PIRL(lam=0.1) PI 4: IRL residual^2=4.430e-02  samples=54750
+  PIRL(lam=0.1) PI 5: IRL residual^2=4.136e-02  samples=54397
+  PIRL(lam=0.1) PI 6: IRL residual^2=3.837e-02  samples=54841
+  PIRL(lam=0.1) PI 7: IRL residual^2=3.530e-02  samples=55521
+  PIRL(lam=0.1) PI 8: IRL residual^2=3.175e-02  samples=56546
+  PIRL(lam=0.1) PI 9: IRL residual^2=3.038e-02  samples=56261
+  -> {"success_rate": 0.0, "nominal_success": false, "nominal_t_up": null, "mean_t_up": null, "nominal_cost": 21.478800500426146, "mean_cost": 21.217237875764294, "mean_abs_u": 0.9055788072962314, "saturation_frac": 0.8585833333333334, "ms_per_step": 0.10035740775250208, "train_wall_s": 184.73702478408813}
+=== cartpole: IRL (no physics) ===
+  PIRL(lam=0.0) PI 0: IRL residual^2=4.343e-02  samples=64814
+  PIRL(lam=0.0) PI 1: IRL residual^2=2.867e-02  samples=65351
+  PIRL(lam=0.0) PI 2: IRL residual^2=2.301e-02  samples=67567
+  PIRL(lam=0.0) PI 3: IRL residual^2=1.682e-02  samples=69395
+  PIRL(lam=0.0) PI 4: IRL residual^2=1.404e-02  samples=70335
+  PIRL(lam=0.0) PI 5: IRL residual^2=1.422e-02  samples=70430
+  PIRL(lam=0.0) PI 6: IRL residual^2=1.254e-02  samples=70527
+  PIRL(lam=0.0) PI 7: IRL residual^2=1.041e-02  samples=69735
+  PIRL(lam=0.0) PI 8: IRL residual^2=1.049e-02  samples=69304
+  PIRL(lam=0.0) PI 9: IRL residual^2=1.056e-02  samples=68522
+  -> {"success_rate": 0.0, "nominal_success": false, "nominal_t_up": null, "mean_t_up": null, "nominal_cost": null, "mean_cost": 16.43415632567203, "mean_abs_u": 0.9387344981059432, "saturation_frac": 0.9014166666666666, "ms_per_step": 0.09870819216788126, "train_wall_s": 55.811869859695435}
+=== cartpole: PINN-AC ===
+  BC of Energy+LQR: mse=0.0199
+  PINN-AC PI 0: PE residual^2=1.941e+00  mean H=-0.129
+  PINN-AC PI 1: PE residual^2=9.942e-01  mean H=0.158
+  PINN-AC PI 2: PE residual^2=6.644e-01  mean H=0.127
+  PINN-AC PI 3: PE residual^2=4.613e-01  mean H=0.111
+  PINN-AC PI 4: PE residual^2=3.167e-01  mean H=0.180
+  PINN-AC PI 5: PE residual^2=2.153e-01  mean H=0.129
+  PINN-AC PI 6: PE residual^2=1.568e-01  mean H=0.020
+  PINN-AC PI 7: PE residual^2=1.262e-01  mean H=0.051
+  PINN-AC PI 8: PE residual^2=1.034e-01  mean H=0.118
+  PINN-AC PI 9: PE residual^2=9.702e-02  mean H=0.044
+  PINN-AC PI 10: PE residual^2=7.464e-02  mean H=0.036
+  PINN-AC PI 11: PE residual^2=7.041e-02  mean H=0.035
+  -> {"success_rate": 0.0, "nominal_success": false, "nominal_t_up": null, "mean_t_up": null, "nominal_cost": null, "mean_cost": null, "mean_abs_u": 0.6511859998464351, "saturation_frac": 0.16975, "ms_per_step": 0.035933611914515495, "train_wall_s": 133.6641402244568}
+=== cartpole: PINN-HJB ===
+  PINN-HJB it 0: residual^2=1.008e+02
+  PINN-HJB it 1000: residual^2=2.179e+00
+  PINN-HJB it 2000: residual^2=1.181e+00
+  PINN-HJB it 3000: residual^2=6.442e-01
+  PINN-HJB it 4000: residual^2=4.087e-01
+  PINN-HJB it 5000: residual^2=2.771e-01
+  PINN-HJB it 6000: residual^2=2.125e-01
+  PINN-HJB it 7000: residual^2=1.724e-01
+  PINN-HJB it 8000: residual^2=1.368e-01
+  PINN-HJB it 9000: residual^2=1.285e-01
+  PINN-HJB it 10000: residual^2=1.155e-01
+  PINN-HJB it 11000: residual^2=1.058e-01
+  PINN-HJB it 12000: residual^2=9.160e-02
+  PINN-HJB it 13000: residual^2=1.215e-01
+  PINN-HJB it 14000: residual^2=8.085e-02
+  PINN-HJB it 15000: residual^2=7.008e-02
+  PINN-HJB it 16000: residual^2=7.448e-02
+  PINN-HJB it 17000: residual^2=6.561e-02
+  PINN-HJB it 18000: residual^2=6.266e-02
+  PINN-HJB it 19000: residual^2=6.796e-02
+  -> {"success_rate": 0.0, "nominal_success": false, "nominal_t_up": null, "mean_t_up": null, "nominal_cost": null, "mean_cost": null, "mean_abs_u": 0.9694629981517792, "saturation_frac": 0.9468333333333333, "ms_per_step": 0.11140545124847753, "train_wall_s": 119.75210332870483}
+=== cartpole: PIRL (no anchor) ===
+  PIRL(lam=0.1) PI 0: IRL residual^2=2.721e-02  samples=64814
+  PIRL(lam=0.1) PI 1: IRL residual^2=1.655e-02  samples=52194
+  PIRL(lam=0.1) PI 2: IRL residual^2=1.208e-02  samples=51617
+  PIRL(lam=0.1) PI 3: IRL residual^2=7.612e-03  samples=51227
+  PIRL(lam=0.1) PI 4: IRL residual^2=5.781e-03  samples=51978
+  PIRL(lam=0.1) PI 5: IRL residual^2=4.889e-03  samples=51643
+  PIRL(lam=0.1) PI 6: IRL residual^2=3.973e-03  samples=51780
+  PIRL(lam=0.1) PI 7: IRL residual^2=3.969e-03  samples=51685
+  PIRL(lam=0.1) PI 8: IRL residual^2=3.315e-03  samples=52891
+  PIRL(lam=0.1) PI 9: IRL residual^2=3.743e-03  samples=52309
+  -> {"success_rate": 0.95, "nominal_success": true, "nominal_t_up": 1.98, "mean_t_up": 1.408421052631579, "nominal_cost": 3.781736253587102, "mean_cost": 2.4423784396624546, "mean_abs_u": 0.8781874857489019, "saturation_frac": 0.7705833333333333, "ms_per_step": 0.08881179967041439, "train_wall_s": 146.81714129447937}

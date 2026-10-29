@@ -1,0 +1,425 @@
+{
+ "DDPG": {
+  "float policy, ideal sensing": {
+   "success_rate": 1.0,
+   "nominal_success": true,
+   "nominal_t_up": 2.14,
+   "mean_t_up": 1.44,
+   "nominal_cost": 3.377106067409565,
+   "mean_cost": 1.8839543562595549,
+   "mean_abs_u": 0.15426645001769065,
+   "saturation_frac": 0.0817,
+   "ms_per_step": 0.020252695609815418
+  },
+  "int8 LUT, ideal sensing": {
+   "success_rate": 1.0,
+   "nominal_success": true,
+   "nominal_t_up": 2.14,
+   "mean_t_up": 1.441,
+   "nominal_cost": 3.3555108247897474,
+   "mean_cost": 1.8802268119025745,
+   "mean_abs_u": 0.16361446512422353,
+   "saturation_frac": 0.0792,
+   "ms_per_step": 0.009952827403321863
+  },
+  "int8 LUT, encoder+EMA+delay+PWM": {
+   "success_rate": 0.45,
+   "nominal_success": true,
+   "nominal_t_up": 2.44,
+   "mean_t_up": 1.1955555555555553,
+   "nominal_cost": 3.7112862718428974,
+   "mean_cost": 7.700282149654811,
+   "mean_abs_u": 0.7746692913385826,
+   "saturation_frac": 0.3512,
+   "ms_per_step": 0.0
+  },
+  "int8 LUT, HIL + 5% torque noise": {
+   "success_rate": 0.45,
+   "nominal_success": true,
+   "nominal_t_up": 2.46,
+   "mean_t_up": 1.1155555555555556,
+   "nominal_cost": 3.7180570977676837,
+   "mean_cost": 7.80035263979254,
+   "mean_abs_u": 0.7632651534697836,
+   "saturation_frac": 0.2535,
+   "ms_per_step": 0.0
+  },
+  "lut_bytes": 8192
+ },
+ "SAC": {
+  "float policy, ideal sensing": {
+   "success_rate": 1.0,
+   "nominal_success": true,
+   "nominal_t_up": 2.16,
+   "mean_t_up": 1.501,
+   "nominal_cost": 3.418385808224509,
+   "mean_cost": 1.9666064107283305,
+   "mean_abs_u": 0.31562417877316473,
+   "saturation_frac": 0.0611,
+   "ms_per_step": 0.024366761406417935
+  },
+  "int8 LUT, ideal sensing": {
+   "success_rate": 1.0,
+   "nominal_success": true,
+   "nominal_t_up": 2.2800000000000002,
+   "mean_t_up": 1.484,
+   "nominal_cost": 3.635905514354017,
+   "mean_cost": 2.0418051518579103,
+   "mean_abs_u": 0.3324842778366999,
+   "saturation_frac": 0.0507,
+   "ms_per_step": 0.009853971807751804
+  },
+  "int8 LUT, encoder+EMA+delay+PWM": {
+   "success_rate": 1.0,
+   "nominal_success": true,
+   "nominal_t_up": 2.68,
+   "mean_t_up": 2.1799999999999997,
+   "nominal_cost": 4.181828626237957,
+   "mean_cost": 2.5310086050356304,
+   "mean_abs_u": 0.3950527559055118,
+   "saturation_frac": 0.0921,
+   "ms_per_step": 0.0
+  },
+  "int8 LUT, HIL + 5% torque noise": {
+   "success_rate": 1.0,
+   "nominal_success": true,
+   "nominal_t_up": 3.02,
+   "mean_t_up": 2.228,
+   "nominal_cost": 4.273948044790526,
+   "mean_cost": 2.5380502642524188,
+   "mean_abs_u": 0.3995855362236955,
+   "saturation_frac": 0.0727,
+   "ms_per_step": 0.0
+  },
+  "lut_bytes": 8192
+ },
+ "TD3": {
+  "float policy, ideal sensing": {
+   "success_rate": 1.0,
+   "nominal_success": true,
+   "nominal_t_up": 2.16,
+   "mean_t_up": 1.45,
+   "nominal_cost": 3.5407030575109455,
+   "mean_cost": 1.8473166292266832,
+   "mean_abs_u": 0.20186125748753547,
+   "saturation_frac": 0.088,
+   "ms_per_step": 0.020807670801877974
+  },
+  "int8 LUT, ideal sensing": {
+   "success_rate": 1.0,
+   "nominal_success": true,
+   "nominal_t_up": 2.16,
+   "mean_t_up": 1.496,
+   "nominal_cost": 3.5374350632722797,
+   "mean_cost": 1.848197909189686,
+   "mean_abs_u": 0.20928239948183486,
+   "saturation_frac": 0.086,
+   "ms_per_step": 0.009863637294620276
+  },
+  "int8 LUT, encoder+EMA+delay+PWM": {
+   "success_rate": 0.45,
+   "nominal_success": true,
+   "nominal_t_up": 2.36,
+   "mean_t_up": 1.2311111111111113,
+   "nominal_cost": 3.992933273033796,
+   "mean_cost": 7.4025966161968055,
+   "mean_abs_u": 0.8299181102362206,
+   "saturation_frac": 0.4128,
+   "ms_per_step": 0.0
+  },
+  "int8 LUT, HIL + 5% torque noise": {
+   "success_rate": 0.4,
+   "nominal_success": true,
+   "nominal_t_up": 2.46,
+   "mean_t_up": 1.055,
+   "nominal_cost": 3.9988213749890797,
+   "mean_cost": 8.019394956981348,
+   "mean_abs_u": 0.8250978802919461,
+   "saturation_frac": 0.3324,
+   "ms_per_step": 0.0
+  },
+  "lut_bytes": 8192
+ },
+ "PPO": {
+  "float policy, ideal sensing": {
+   "success_rate": 1.0,
+   "nominal_success": true,
+   "nominal_t_up": 2.16,
+   "mean_t_up": 1.52,
+   "nominal_cost": 3.444413183091468,
+   "mean_cost": 1.9886510053833604,
+   "mean_abs_u": 0.164117124325037,
+   "saturation_frac": 0.1094,
+   "ms_per_step": 0.015208460704889149
+  },
+  "int8 LUT, ideal sensing": {
+   "success_rate": 1.0,
+   "nominal_success": true,
+   "nominal_t_up": 2.16,
+   "mean_t_up": 1.516,
+   "nominal_cost": 3.4428439802049464,
+   "mean_cost": 1.9870174938378309,
+   "mean_abs_u": 0.16101198549809587,
+   "saturation_frac": 0.1064,
+   "ms_per_step": 0.006888133706524968
+  },
+  "int8 LUT, encoder+EMA+delay+PWM": {
+   "success_rate": 1.0,
+   "nominal_success": true,
+   "nominal_t_up": 2.32,
+   "mean_t_up": 1.6800000000000002,
+   "nominal_cost": 3.6162907738951047,
+   "mean_cost": 2.0938258777146386,
+   "mean_abs_u": 0.1718527559055118,
+   "saturation_frac": 0.1067,
+   "ms_per_step": 0.0
+  },
+  "int8 LUT, HIL + 5% torque noise": {
+   "success_rate": 1.0,
+   "nominal_success": true,
+   "nominal_t_up": 2.36,
+   "mean_t_up": 1.707,
+   "nominal_cost": 3.6350485507206773,
+   "mean_cost": 2.0967434692067854,
+   "mean_abs_u": 0.1868679344949765,
+   "saturation_frac": 0.0739,
+   "ms_per_step": 0.0
+  },
+  "lut_bytes": 8192
+ },
+ "PIRL": {
+  "float policy, ideal sensing": {
+   "success_rate": 1.0,
+   "nominal_success": true,
+   "nominal_t_up": 2.08,
+   "mean_t_up": 1.459,
+   "nominal_cost": 3.457127434553179,
+   "mean_cost": 1.9600830742919573,
+   "mean_abs_u": 0.138313688260373,
+   "saturation_frac": 0.1216,
+   "ms_per_step": 0.08663344969972968
+  },
+  "int8 LUT, ideal sensing": {
+   "success_rate": 0.95,
+   "nominal_success": false,
+   "nominal_t_up": null,
+   "mean_t_up": 1.408421052631579,
+   "nominal_cost": 20.0,
+   "mean_cost": 2.777731885906453,
+   "mean_abs_u": 0.11759567240499252,
+   "saturation_frac": 0.0908,
+   "ms_per_step": 0.009935215103905649
+  },
+  "int8 LUT, encoder+EMA+delay+PWM": {
+   "success_rate": 0.95,
+   "nominal_success": false,
+   "nominal_t_up": null,
+   "mean_t_up": 1.7642105263157897,
+   "nominal_cost": 20.0,
+   "mean_cost": 3.13944523146526,
+   "mean_abs_u": 0.43176220472440946,
+   "saturation_frac": 0.1452,
+   "ms_per_step": 0.0
+  },
+  "int8 LUT, HIL + 5% torque noise": {
+   "success_rate": 1.0,
+   "nominal_success": true,
+   "nominal_t_up": 4.82,
+   "mean_t_up": 1.8739999999999999,
+   "nominal_cost": 7.4743407786522384,
+   "mean_cost": 2.564606474673998,
+   "mean_abs_u": 0.44228482118980944,
+   "saturation_frac": 0.1058,
+   "ms_per_step": 0.0
+  },
+  "lut_bytes": 8192
+ },
+ "XTFC-PIRL": {
+  "float policy, ideal sensing": {
+   "success_rate": 1.0,
+   "nominal_success": true,
+   "nominal_t_up": 2.12,
+   "mean_t_up": 1.371,
+   "nominal_cost": 3.530983487896265,
+   "mean_cost": 1.8520389605637404,
+   "mean_abs_u": 0.1297537589667885,
+   "saturation_frac": 0.1187,
+   "ms_per_step": 0.15353245619917288
+  },
+  "int8 LUT, ideal sensing": {
+   "success_rate": 0.95,
+   "nominal_success": false,
+   "nominal_t_up": null,
+   "mean_t_up": 1.3757894736842105,
+   "nominal_cost": 20.0,
+   "mean_cost": 2.724441414153727,
+   "mean_abs_u": 0.11816007598327369,
+   "saturation_frac": 0.0956,
+   "ms_per_step": 0.009659494599327445
+  },
+  "int8 LUT, encoder+EMA+delay+PWM": {
+   "success_rate": 0.95,
+   "nominal_success": false,
+   "nominal_t_up": null,
+   "mean_t_up": 1.5315789473684214,
+   "nominal_cost": 20.0,
+   "mean_cost": 2.8180610377885817,
+   "mean_abs_u": 0.1766307086614173,
+   "saturation_frac": 0.1281,
+   "ms_per_step": 0.0
+  },
+  "int8 LUT, HIL + 5% torque noise": {
+   "success_rate": 1.0,
+   "nominal_success": true,
+   "nominal_t_up": 2.72,
+   "mean_t_up": 1.605,
+   "nominal_cost": 4.678323364220272,
+   "mean_cost": 2.107568027125931,
+   "mean_abs_u": 0.20947469871781332,
+   "saturation_frac": 0.0889,
+   "ms_per_step": 0.0
+  },
+  "lut_bytes": 8192
+ },
+ "XTFC-PI": {
+  "float policy, ideal sensing": {
+   "success_rate": 1.0,
+   "nominal_success": true,
+   "nominal_t_up": 2.14,
+   "mean_t_up": 1.427,
+   "nominal_cost": 3.495464121241665,
+   "mean_cost": 1.8970199072443055,
+   "mean_abs_u": 0.13622923625354855,
+   "saturation_frac": 0.1207,
+   "ms_per_step": 0.12977955790702253
+  },
+  "int8 LUT, ideal sensing": {
+   "success_rate": 0.95,
+   "nominal_success": false,
+   "nominal_t_up": null,
+   "mean_t_up": 1.3926315789473682,
+   "nominal_cost": 20.0,
+   "mean_cost": 2.7174070955176566,
+   "mean_abs_u": 0.11623890537898121,
+   "saturation_frac": 0.0964,
+   "ms_per_step": 0.006744490296114236
+  },
+  "int8 LUT, encoder+EMA+delay+PWM": {
+   "success_rate": 0.95,
+   "nominal_success": false,
+   "nominal_t_up": null,
+   "mean_t_up": 1.7463157894736845,
+   "nominal_cost": 20.0,
+   "mean_cost": 2.8989083862913847,
+   "mean_abs_u": 0.17907952755905512,
+   "saturation_frac": 0.1492,
+   "ms_per_step": 0.0
+  },
+  "int8 LUT, HIL + 5% torque noise": {
+   "success_rate": 1.0,
+   "nominal_success": true,
+   "nominal_t_up": 2.84,
+   "mean_t_up": 1.8260000000000005,
+   "nominal_cost": 4.63969821480056,
+   "mean_cost": 2.187320369113178,
+   "mean_abs_u": 0.22270681094986725,
+   "saturation_frac": 0.1037,
+   "ms_per_step": 0.0
+  },
+  "lut_bytes": 8192
+ },
+ "DP": {
+  "float policy, ideal sensing": {
+   "success_rate": 1.0,
+   "nominal_success": true,
+   "nominal_t_up": 2.08,
+   "mean_t_up": 1.2890000000000004,
+   "nominal_cost": 3.3415715289940255,
+   "mean_cost": 1.791048482231382,
+   "mean_abs_u": 0.12830748961325736,
+   "saturation_frac": 0.0923,
+   "ms_per_step": 0.07579369759187102
+  },
+  "int8 LUT, ideal sensing": {
+   "success_rate": 0.95,
+   "nominal_success": false,
+   "nominal_t_up": null,
+   "mean_t_up": 1.2147368421052633,
+   "nominal_cost": 20.0,
+   "mean_cost": 2.610769043370399,
+   "mean_abs_u": 0.09515251104497095,
+   "saturation_frac": 0.0769,
+   "ms_per_step": 0.006737763294950128
+  },
+  "int8 LUT, encoder+EMA+delay+PWM": {
+   "success_rate": 0.95,
+   "nominal_success": false,
+   "nominal_t_up": null,
+   "mean_t_up": 1.5463157894736845,
+   "nominal_cost": 20.0,
+   "mean_cost": 2.7774195800619754,
+   "mean_abs_u": 0.13879763779527562,
+   "saturation_frac": 0.0932,
+   "ms_per_step": 0.0
+  },
+  "int8 LUT, HIL + 5% torque noise": {
+   "success_rate": 1.0,
+   "nominal_success": true,
+   "nominal_t_up": 3.22,
+   "mean_t_up": 1.616,
+   "nominal_cost": 5.410862292100228,
+   "mean_cost": 2.0971462496329076,
+   "mean_abs_u": 0.1765580190524248,
+   "saturation_frac": 0.065,
+   "ms_per_step": 0.0
+  },
+  "lut_bytes": 8192
+ },
+ "Energy+LQR": {
+  "float policy, ideal sensing": {
+   "success_rate": 1.0,
+   "nominal_success": true,
+   "nominal_t_up": 2.24,
+   "mean_t_up": 1.4020000000000001,
+   "nominal_cost": 3.6284583660776253,
+   "mean_cost": 1.8864626543078757,
+   "mean_abs_u": 0.1392652092138669,
+   "saturation_frac": 0.1231,
+   "ms_per_step": 0.0064621310099028054
+  },
+  "int8 LUT, ideal sensing": {
+   "success_rate": 0.95,
+   "nominal_success": false,
+   "nominal_t_up": null,
+   "mean_t_up": 1.358947368421053,
+   "nominal_cost": 20.0,
+   "mean_cost": 2.6976528318209776,
+   "mean_abs_u": 0.12036619439237284,
+   "saturation_frac": 0.0932,
+   "ms_per_step": 0.006709800602402538
+  },
+  "int8 LUT, encoder+EMA+delay+PWM": {
+   "success_rate": 0.3,
+   "nominal_success": false,
+   "nominal_t_up": null,
+   "mean_t_up": 0.6166666666666667,
+   "nominal_cost": 20.0,
+   "mean_cost": 9.793786741674712,
+   "mean_abs_u": 0.7910118110236221,
+   "saturation_frac": 0.6042,
+   "ms_per_step": 0.0
+  },
+  "int8 LUT, HIL + 5% torque noise": {
+   "success_rate": 0.35,
+   "nominal_success": true,
+   "nominal_t_up": 2.96,
+   "mean_t_up": 0.9971428571428572,
+   "nominal_cost": 4.984855242798657,
+   "mean_cost": 9.141617838404525,
+   "mean_abs_u": 0.8144110497442676,
+   "saturation_frac": 0.4015,
+   "ms_per_step": 0.0
+  },
+  "lut_bytes": 8192
+ }
+}

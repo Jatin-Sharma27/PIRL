@@ -1,0 +1,368 @@
+<title>Weak-Motor Swing-Up Lab</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Semi+Condensed:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a bench notebook. Two live "instruments" (pendulum, cart-pole) on top, the result tables below. */
+:root {
+  --bg: #f4f5f2; --panel: #ffffff; --ink: #15191c; --ink-2: #4b5258; --ink-3: #7c848a;
+  --rule: #dde0dc; --accent: #2a5bd7; --motor: #d9731f; --good: #1d8a4e; --bad: #c2412e; --track: #eceee9;
+  --f-classical: #2a78d6; --f-mpc: #eb6834; --f-phys: #1baf7a; --f-rl: #6250d6; --f-dp: #52514e;
+  --display: "Saira Semi Condensed", "Arial Narrow", system-ui, sans-serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #111416; --panel: #181c1f; --ink: #e9ece8; --ink-2: #b3b9bd; --ink-3: #848c92;
+  --rule: #2a3034; --accent: #6f95ff; --motor: #f0913e; --good: #3fbf77; --bad: #ef6b57; --track: #20262a;
+  --f-classical: #3987e5; --f-mpc: #d95926; --f-phys: #199e70; --f-rl: #9085e9; --f-dp: #a4a39c; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #111416; --panel: #181c1f; --ink: #e9ece8; --ink-2: #b3b9bd; --ink-3: #848c92;
+  --rule: #2a3034; --accent: #6f95ff; --motor: #f0913e; --good: #3fbf77; --bad: #ef6b57; --track: #20262a;
+  --f-classical: #3987e5; --f-mpc: #d95926; --f-phys: #199e70; --f-rl: #9085e9; --f-dp: #a4a39c; color-scheme: dark }
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--ink); font: 15px/1.55 var(--body); }
+.wrap { max-width: 1180px; margin: 0 auto; padding-block: 28px 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 28px }
+header h1 { font: 700 clamp(30px, 4.6vw, 46px)/1.05 var(--display); letter-spacing: .01em; margin: 0; text-wrap: balance }
+header p { margin: 8px 0 0; color: var(--ink-2); max-width: 70ch }
+.spec { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 14px; font: 13px var(--mono); color: var(--ink-2) }
+.spec b { color: var(--ink); font-weight: 500 }
+h2 { font: 700 24px/1.2 var(--display); margin: 0; letter-spacing: .01em }
+h3 { font: 600 15px var(--body); margin: 0 }
+.lab { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 20px; background: var(--panel);
+  border: 1px solid var(--rule); border-radius: 10px; padding: 18px }
+@media (max-width: 860px) { .lab { grid-template-columns: minmax(0, 1fr) } }
+.stage { display: grid; gap: 10px; min-width: 0 }
+canvas { width: 100%; display: block; background: var(--track); border-radius: 6px }
+.controls { display: grid; gap: 14px; align-content: start; min-width: 0 }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center }
+label.f { display: grid; gap: 4px; font-size: 13px; color: var(--ink-2) }
+select, button, input[type=range] { font: inherit }
+select { padding: 7px 10px; border-radius: 6px; border: 1px solid var(--rule); background: var(--bg); color: var(--ink); max-width: 100% }
+button { padding: 7px 14px; border-radius: 6px; border: 1px solid var(--rule); background: var(--bg); color: var(--ink); cursor: pointer }
+button.primary { background: var(--accent); border-color: var(--accent); color: #fff }
+button:focus-visible, select:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px }
+input[type=range] { width: 100%; accent-color: var(--motor) }
+.readout { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px }
+.readout div { background: var(--bg); border-radius: 6px; padding: 6px 8px; min-width: 0 }
+.readout small { display: block; color: var(--ink-3); font-size: 11px; letter-spacing: .06em; text-transform: uppercase }
+.readout span { font: 500 15px var(--mono); font-variant-numeric: tabular-nums }
+.chip { display: inline-flex; align-items: center; gap: 6px; font: 600 12px var(--body); letter-spacing: .05em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 99px; background: var(--bg); color: var(--ink-2) }
+.chip::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor }
+.chip.up { color: var(--good) } .chip.swing { color: var(--motor) } .chip.fail { color: var(--bad) }
+.note { font-size: 13px; color: var(--ink-2); margin: 0 }
+.mono { font-family: var(--mono) }
+.results { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px }
+@media (max-width: 960px) { .results { grid-template-columns: minmax(0, 1fr) } }
+.card { background: var(--panel); border: 1px solid var(--rule); border-radius: 10px; padding: 18px; display: grid; gap: 12px; min-width: 0; align-content: start }
+.tbl { overflow-x: auto }
+table { border-collapse: collapse; width: 100%; font-size: 13px; font-variant-numeric: tabular-nums }
+th, td { text-align: right; padding: 6px 8px; border-bottom: 1px solid var(--rule); white-space: nowrap }
+th:first-child, td:first-child { text-align: left }
+th { font-weight: 600; color: var(--ink-2); font-size: 12px }
+td.ok { color: var(--good); font-weight: 600 } td.no { color: var(--bad) }
+.fam { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 7px; vertical-align: 0 }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12px; color: var(--ink-2) }
+.findings { display: grid; gap: 10px; margin: 0; padding-left: 20px }
+.findings li { max-width: 80ch }
+svg text { fill: var(--ink-2); font: 11px var(--body) }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Weak-Motor Swing-Up Lab</h1>
+    <p>A pendulum and a cart-pole, each driven by a DC motor too weak to lift the pole directly. Every controller has to pump energy over several swings and then catch the pole upright. The physics below is the same model the controllers were trained on, integrated live in your browser.</p>
+    <div class="spec">
+      <span>pendulum stall torque <b>0.25 N·m = 42% of mgl</b></span>
+      <span>back-EMF: torque → 0 at <b>20 rad/s</b></span>
+      <span>cart force <b>4 N</b>, rail <b>±0.40 m</b></span>
+      <span>control <b>50 Hz</b>, |u| ≤ 1</span>
+    </div>
+  </header>
+
+  <section class="lab" aria-label="Pendulum simulator">
+    <div class="stage">
+      <canvas id="pc" width="720" height="420" aria-label="Pendulum animation"></canvas>
+      <canvas id="pchart" width="720" height="150" aria-label="Angle and motor command over time"></canvas>
+    </div>
+    <div class="controls">
+      <div class="row" style="justify-content: space-between"><h2>Pendulum</h2><span id="pstate" class="chip swing">swinging up</span></div>
+      <label class="f" for="pctrl">Controller
+        <select id="pctrl"></select></label>
+      <label class="f" for="pmotor">Motor strength: <span id="pmotorv" class="mono"></span>
+        <input id="pmotor" type="range" min="0.35" max="1.5" step="0.05" value="1"></label>
+      <div class="row">
+        <button id="pplay" class="primary">Pause</button>
+        <button id="preset">Restart from hanging</button>
+        <button id="prand">Random start</button>
+        <button id="pkick">Kick</button>
+      </div>
+      <div class="readout">
+        <div><small>time</small><span id="rt">0.00 s</span></div>
+        <div><small>angle</small><span id="rth">180°</span></div>
+        <div><small>rate</small><span id="rw">0.0</span></div>
+        <div><small>motor u</small><span id="ru">0.00</span></div>
+      </div>
+      <p class="note" id="pinfo"></p>
+      <p class="note">Learned controllers run from their 128×64 int8 lookup table, the same table the ESP32 firmware uses. They were trained at 100% motor strength; lower the slider to see where each one gives out.</p>
+    </div>
+  </section>
+
+  <section class="lab" aria-label="Cart-pole replays">
+    <div class="stage">
+      <canvas id="cc" width="720" height="380" aria-label="Cart-pole animation"></canvas>
+      <canvas id="cchart" width="720" height="150" aria-label="Cart position and pole angle over time"></canvas>
+    </div>
+    <div class="controls">
+      <div class="row" style="justify-content: space-between"><h2>Cart-pole</h2><span id="cstate" class="chip swing">swinging up</span></div>
+      <label class="f" for="cctrl">Controller
+        <select id="cctrl"></select></label>
+      <label class="f" for="cstart">Start
+        <select id="cstart"></select></label>
+      <div class="row">
+        <button id="cplay" class="primary">Pause</button>
+        <button id="creset">Replay</button>
+      </div>
+      <div class="readout">
+        <div><small>time</small><span id="ct">0.00 s</span></div>
+        <div><small>cart</small><span id="cx">0.00 m</span></div>
+        <div><small>angle</small><span id="cth">180°</span></div>
+        <div><small>motor u</small><span id="cu">0.00</span></div>
+      </div>
+      <p class="note" id="cinfo"></p>
+      <p class="note">The 4-D cart-pole policies are replays of the recorded closed-loop runs from the HPC evaluation; they are not tabulated live.</p>
+    </div>
+  </section>
+
+  <section class="card" aria-label="Findings">
+    <h2>What the experiments show</h2>
+    <ul class="findings">__FINDINGS__</ul>
+  </section>
+
+  <section class="results">
+    <div class="card"><h2>Pendulum results</h2><div class="legend" id="leg1"></div><svg id="bar-p" role="img" aria-label="Mean cost by method, pendulum"></svg><div class="tbl" id="tbl-p"></div></div>
+    <div class="card"><h2>Cart-pole results</h2><div class="legend" id="leg2"></div><svg id="bar-c" role="img" aria-label="Mean cost by method, cart-pole"></svg><div class="tbl" id="tbl-c"></div></div>
+  </section>
+  <p class="note">Success = upright (|θ| &lt; 0.15 rad, |ω| &lt; 1 rad/s, cart inside the rail) for the last 1.5 s, over 20 fixed starts. Cost = Σ ℓ(x,u)·dt with ℓ = (1−cos θ) + 0.01ω² + 0.05u² (+ cart terms), the same objective for every method. DP is the numerically exact optimum for the pendulum.</p>
+</div>
+
+<script>
+const DATA = __DATA__;
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const FAM = {"LQR":"classical","Energy+LQR":"classical","DP":"dp","MPPI-MPC":"mpc","Explicit-MPC":"mpc",
+  "PINN-HJB":"phys","PINN-AC":"phys","XTFC-PI":"phys","XTFC-PIRL":"phys","PIRL":"phys","IRL (no physics)":"phys",
+  "PIRL (no anchor)":"phys","XTFC-PIRL (no anchor)":"phys","DDPG":"rl","TD3":"rl","SAC":"rl","PPO":"rl","A2C":"rl"};
+const FAMNAME = {classical:"Classical", dp:"Optimal (DP)", mpc:"MPC", phys:"Physics-informed", rl:"Model-free RL"};
+const famColor = n => css("--f-" + (FAM[n] || "dp"));
+const wrap = a => { a = (a + Math.PI) % (2*Math.PI); if (a < 0) a += 2*Math.PI; return a - Math.PI };
+const clip = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function fitCanvas(cv) {
+  const r = cv.getBoundingClientRect(), d = Math.min(window.devicePixelRatio || 1, 2);
+  const w = Math.max(200, Math.round(r.width * d)), h = Math.round(w * cv.height / cv.width);
+  if (cv.width !== w) { cv.width = w; cv.height = h }
+  return cv.getContext("2d");
+}
+
+function strip(cv, series, tmax, now) {
+  const ctx = fitCanvas(cv), W = cv.width, H = cv.height, pad = 8 * (W / 720);
+  ctx.clearRect(0, 0, W, H);
+  ctx.strokeStyle = css("--rule"); ctx.lineWidth = 1;
+  for (const s of series) { const y = H * s.zero; ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke() }
+  ctx.font = `${11 * W / 720}px ${css("--body")}`;
+  series.forEach((s, k) => {
+    ctx.strokeStyle = s.color; ctx.lineWidth = 2 * W / 720; ctx.beginPath();
+    const t0 = Math.max(0, now - tmax);
+    s.data.forEach(([t, v], i) => { if (t < t0) return; const x = pad + (t - t0) / tmax * (W - 2 * pad), y = H * s.zero - v * s.scale * H;
+      i === 0 || t - t0 < 1e-9 ? ctx.moveTo(x, y) : ctx.lineTo(x, y) });
+    ctx.stroke(); ctx.fillStyle = s.color; ctx.fillText(s.label, pad, 14 * W / 720 + k * 14 * W / 720);
+  });
+}
+
+/* ---------------- pendulum (live) ---------------- */
+(function () {
+  const D = DATA.pendulum, P = D.params, [NT, NW] = D.lut_shape;
+  const J = P.m * P.l * P.l + P.J_rotor, mgl = P.m * P.g * P.l;
+  let motor = 1, x = [Math.PI, 0], t = 0, u = 0, hist = [], playing = !reduced, trail = [];
+  const sel = document.getElementById("pctrl");
+  const opts = [["Energy+LQR", "Energy shaping + LQR (classical)"]];
+  const order = ["DP", "PIRL", "XTFC-PIRL", "XTFC-PI", "PINN-AC", "DDPG", "SAC", "TD3", "PPO", "Explicit-MPC"];
+  for (const n of order) if (D.policies[n]) opts.push([n, n === "DP" ? "DP (exact optimum)" : n + (FAM[n] === "rl" ? " (deep RL)" : FAM[n] === "mpc" ? " (MPC distilled)" : " (physics-informed)")]);
+  opts.push(["LQR", "LQR only (no swing-up)"], ["none", "Motor off"]);
+  for (const [v, l] of opts) sel.add(new Option(l, v));
+  sel.value = D.policies.PIRL ? "PIRL" : "Energy+LQR";
+
+  function lut(name, th, w) {
+    const L = D.policies[name].lut;
+    let ti = (wrap(th) + Math.PI) / (2 * Math.PI) * NT, wi = clip((w + D.w_lim) / (2 * D.w_lim) * (NW - 1), 0, NW - 1 - 1e-9);
+    let t0 = Math.floor(ti), ft = ti - t0; t0 %= NT; const t1 = (t0 + 1) % NT;
+    const w0 = Math.floor(wi), fw = wi - w0, w1 = Math.min(w0 + 1, NW - 1);
+    return ((1-ft)*(1-fw)*L[t0*NW+w0] + ft*(1-fw)*L[t1*NW+w0] + (1-ft)*fw*L[t0*NW+w1] + ft*fw*L[t1*NW+w1]) / 127;
+  }
+  function policy(th, w) {
+    const c = sel.value, th_ = wrap(th), E = D.energy_lqr;
+    if (c === "none") return 0;
+    const ulqr = -(E.K[0] * th_ + E.K[1] * w);
+    if (c === "LQR") return ulqr;
+    if (c === "Energy+LQR") {
+      if (Math.abs(th_) < E.catch && Math.abs(w) < 4) return ulqr;
+      const en = 0.5 * J * w * w + mgl * (Math.cos(th_) - 1);
+      return Math.abs(w) < 1e-3 ? 1 : clip(E.k_e * (-en) * w, -1, 1);
+    }
+    return lut(c, th, w);
+  }
+  function f(s, uu) {   // plant with the slider's motor (stall torque and back-EMF scale together)
+    const ts = P.tau_stall * motor, beff = P.b + ts / P.w_noload;
+    return [s[1], (mgl * Math.sin(s[0]) - beff * s[1] - P.tau_c * Math.tanh(s[1] / 0.05) + ts * uu) / J];
+  }
+  function step() {
+    u = clip(policy(x[0], x[1]), -1, 1);
+    const h = P.dt / P.substeps;
+    for (let k = 0; k < P.substeps; k++) {
+      const k1 = f(x, u), k2 = f([x[0]+h/2*k1[0], x[1]+h/2*k1[1]], u), k3 = f([x[0]+h/2*k2[0], x[1]+h/2*k2[1]], u), k4 = f([x[0]+h*k3[0], x[1]+h*k3[1]], u);
+      x = [x[0] + h/6*(k1[0]+2*k2[0]+2*k3[0]+k4[0]), x[1] + h/6*(k1[1]+2*k2[1]+2*k3[1]+k4[1])];
+    }
+    x[0] = wrap(x[0]); t += P.dt;
+    hist.push([t, Math.abs(x[0]) / Math.PI, u]); if (hist.length > 2000) hist.shift();
+  }
+  function reset(x0) { x = x0; t = 0; hist = []; trail = []; upSince = null }
+  let upSince = null;
+  function draw() {
+    const cv = document.getElementById("pc"), ctx = fitCanvas(cv), W = cv.width, H = cv.height, s = W / 720;
+    ctx.clearRect(0, 0, W, H);
+    const cx = W / 2, cy = H * 0.52, L = H * 0.36;
+    ctx.setLineDash([4 * s, 5 * s]); ctx.strokeStyle = css("--rule"); ctx.lineWidth = 1.5 * s;
+    ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx, cy - L * 1.2); ctx.stroke(); ctx.setLineDash([]);
+    const bx = cx + L * Math.sin(x[0]), by = cy - L * Math.cos(x[0]);
+    trail.push([bx, by]); if (trail.length > 45) trail.shift();
+    trail.forEach(([px, py], i) => { ctx.fillStyle = css("--accent"); ctx.globalAlpha = i / trail.length * 0.25; ctx.beginPath(); ctx.arc(px, py, 4 * s, 0, 7); ctx.fill() });
+    ctx.globalAlpha = 1;
+    // motor torque arc
+    const ang = Math.abs(u) * Math.PI * 0.9;
+    ctx.strokeStyle = css("--motor"); ctx.lineWidth = 6 * s; ctx.lineCap = "round"; ctx.beginPath();
+    ctx.arc(cx, cy, 34 * s, -Math.PI / 2, -Math.PI / 2 + (u >= 0 ? ang : -ang), u < 0); ctx.stroke();
+    ctx.strokeStyle = css("--accent"); ctx.lineWidth = 7 * s; ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(bx, by); ctx.stroke();
+    ctx.fillStyle = css("--ink-2"); ctx.beginPath(); ctx.arc(cx, cy, 16 * s, 0, 7); ctx.fill();
+    ctx.fillStyle = css("--bad"); ctx.beginPath(); ctx.arc(bx, by, 15 * s, 0, 7); ctx.fill();
+    ctx.fillStyle = css("--ink-3"); ctx.font = `${12 * s}px ${css("--mono")}`;
+    ctx.fillText(`motor torque ${(u * P.tau_stall * motor).toFixed(3)} N·m`, 14 * s, H - 14 * s);
+    strip(document.getElementById("pchart"), [
+      {data: hist.map(h => [h[0], h[1]]), color: css("--accent"), zero: 0.95, scale: 0.85, label: "|angle from upright| / π"},
+      {data: hist.map(h => [h[0], h[2]]), color: css("--motor"), zero: 0.5, scale: 0.0, label: ""}], 10, t);
+    // overlay u on the same chart in its own band
+    const ch = document.getElementById("pchart"), c2 = ch.getContext("2d"), cw = ch.width, chh = ch.height;
+    c2.strokeStyle = css("--motor"); c2.lineWidth = 2 * cw / 720; c2.beginPath();
+    const t0 = Math.max(0, t - 10);
+    hist.forEach(([tt, , uu], i) => { if (tt < t0) return; const px = 8 * cw / 720 + (tt - t0) / 10 * (cw - 16 * cw / 720), py = chh * 0.5 - uu * chh * 0.2; i === 0 ? c2.moveTo(px, py) : c2.lineTo(px, py) });
+    c2.stroke(); c2.fillStyle = css("--motor"); c2.font = `${11 * cw / 720}px ${css("--body")}`; c2.fillText("motor command u", 8 * cw / 720, chh * 0.5 - chh * 0.22);
+    const up = Math.abs(wrap(x[0])) < 0.15 && Math.abs(x[1]) < 1;
+    if (up) { if (upSince === null) upSince = t } else upSince = null;
+    const st = document.getElementById("pstate");
+    if (upSince !== null && t - upSince > 1) { st.className = "chip up"; st.textContent = `balanced since ${upSince.toFixed(1)} s` }
+    else if (t > 12) { st.className = "chip fail"; st.textContent = "not balanced after 12 s" }
+    else { st.className = "chip swing"; st.textContent = "swinging up" }
+    document.getElementById("rt").textContent = t.toFixed(2) + " s";
+    document.getElementById("rth").textContent = (wrap(x[0]) * 180 / Math.PI).toFixed(0) + "°";
+    document.getElementById("rw").textContent = x[1].toFixed(1) + " rad/s";
+    document.getElementById("ru").textContent = u.toFixed(2);
+  }
+  function info() {
+    const m = (D.metrics || {})[sel.value];
+    const pct = Math.round(P.tau_stall * motor / mgl * 100);
+    document.getElementById("pmotorv").textContent = `${Math.round(motor * 100)}% (stall torque ${(P.tau_stall * motor).toFixed(3)} N·m = ${pct}% of mgl)`;
+    document.getElementById("pinfo").textContent = m ? `Evaluation at 100% motor: ${Math.round(m.success_rate * 100)}% of 20 starts balanced; from hanging rest, upright after ${m.nominal_t_up ? m.nominal_t_up.toFixed(2) + " s" : "—"}, cost ${m.nominal_cost ? m.nominal_cost.toFixed(2) : "—"}.` : "";
+  }
+  let acc = 0, last = performance.now();
+  function loop(now) {
+    if (playing) { acc += Math.min(0.1, (now - last) / 1000); while (acc >= P.dt) { step(); acc -= P.dt } }
+    last = now; draw(); requestAnimationFrame(loop);
+  }
+  sel.onchange = () => { reset([Math.PI, 0]); info() };
+  document.getElementById("pmotor").oninput = e => { motor = +e.target.value; info() };
+  document.getElementById("pplay").onclick = e => { playing = !playing; e.target.textContent = playing ? "Pause" : "Play" };
+  document.getElementById("pplay").textContent = playing ? "Pause" : "Play";
+  document.getElementById("preset").onclick = () => reset([Math.PI, 0]);
+  document.getElementById("prand").onclick = () => reset([(Math.random() * 2 - 1) * Math.PI, (Math.random() * 2 - 1) * 2]);
+  document.getElementById("pkick").onclick = () => { x = [x[0], x[1] + (Math.random() < 0.5 ? -4 : 4)]; upSince = null };
+  if (reduced) { for (let i = 0; i < 150; i++) step() }
+  info(); requestAnimationFrame(loop);
+})();
+
+/* ---------------- cart-pole (replay) ---------------- */
+(function () {
+  const D = DATA.cartpole, P = D.params, sel = document.getElementById("cctrl"), ss = document.getElementById("cstart");
+  const names = Object.keys(D.trajs);
+  for (const n of names) sel.add(new Option(n + (FAM[n] ? "  ·  " + FAMNAME[FAM[n]] : ""), n));
+  sel.value = names.includes("PPO") ? "PPO" : names[0];
+  ["Hanging at rest", "Start B", "Start C"].forEach((l, i) => { if (i < D.starts.length) ss.add(new Option(i ? `${l} (θ ${(D.starts[i][2] * 180 / Math.PI).toFixed(0)}°)` : l, i)) });
+  let k = 0, playing = !reduced, acc = 0, last = performance.now();
+  const cur = () => D.trajs[sel.value];
+  function draw() {
+    const tr = cur(), i = +ss.value, X = tr.x[i], U = tr.u[i], n = X.length;
+    const kk = Math.min(k, n - 1), [p, th] = X[kk], u = U[Math.min(kk, U.length - 1)];
+    const cv = document.getElementById("cc"), ctx = fitCanvas(cv), W = cv.width, H = cv.height, s = W / 720;
+    ctx.clearRect(0, 0, W, H);
+    const scale = (W * 0.8) / (2 * P.x_lim + 0.2), cy = H * 0.55, x0 = W / 2;
+    ctx.strokeStyle = css("--ink-3"); ctx.lineWidth = 4 * s; ctx.beginPath(); ctx.moveTo(x0 - (P.x_lim + 0.06) * scale, cy); ctx.lineTo(x0 + (P.x_lim + 0.06) * scale, cy); ctx.stroke();
+    ctx.fillStyle = css("--bad"); for (const sg of [-1, 1]) ctx.fillRect(x0 + sg * (P.x_lim + 0.06) * scale - 3 * s, cy - 18 * s, 6 * s, 36 * s);
+    const cxp = x0 + p * scale, Lp = 2 * P.l * scale;
+    ctx.fillStyle = css("--ink-2"); ctx.fillRect(cxp - 30 * s, cy - 12 * s, 60 * s, 24 * s);
+    const bx = cxp + Lp * Math.sin(th), by = cy - Lp * Math.cos(th);
+    ctx.strokeStyle = css("--accent"); ctx.lineWidth = 7 * s; ctx.lineCap = "round"; ctx.beginPath(); ctx.moveTo(cxp, cy); ctx.lineTo(bx, by); ctx.stroke();
+    ctx.fillStyle = css("--bad"); ctx.beginPath(); ctx.arc(bx, by, 10 * s, 0, 7); ctx.fill();
+    ctx.fillStyle = css("--motor"); ctx.fillRect(cxp, cy + 22 * s, u * 60 * s, 8 * s);
+    ctx.fillStyle = css("--ink-3"); ctx.font = `${12 * s}px ${css("--mono")}`; ctx.fillText(`belt force ${(u * P.F_stall).toFixed(2)} N (orange bar)`, 14 * s, H - 14 * s);
+    const t = kk * P.dt, hist = [];
+    for (let j = 0; j <= kk; j++) hist.push([j * P.dt, X[j][0] / P.x_lim, Math.abs(wrap(X[j][1])) / Math.PI]);
+    strip(document.getElementById("cchart"), [
+      {data: hist.map(h => [h[0], h[2]]), color: css("--accent"), zero: 0.95, scale: 0.85, label: "|angle from upright| / π"},
+      {data: hist.map(h => [h[0], h[1]]), color: css("--motor"), zero: 0.5, scale: 0.4, label: "cart position / rail half-length"}], 10, Math.max(t, 10));
+    const up = Math.abs(wrap(th)) < 0.15, st = document.getElementById("cstate");
+    const crashed = !tr.alive[i] && kk >= n - 1;
+    st.className = "chip " + (crashed ? "fail" : up && kk > 0 ? "up" : kk >= n - 1 ? "fail" : "swing");
+    st.textContent = crashed ? "hit the end stop" : up && kk > 0 ? "balanced" : kk >= n - 1 ? "not balanced" : "swinging up";
+    document.getElementById("ct").textContent = t.toFixed(2) + " s";
+    document.getElementById("cx").textContent = p.toFixed(2) + " m";
+    document.getElementById("cth").textContent = (wrap(th) * 180 / Math.PI).toFixed(0) + "°";
+    document.getElementById("cu").textContent = u.toFixed(2);
+  }
+  function info() {
+    const m = cur().metrics;
+    document.getElementById("cinfo").textContent = m ? `Evaluation: ${Math.round(m.success_rate * 100)}% of 20 starts balanced; from hanging rest ${m.nominal_success ? "upright after " + m.nominal_t_up.toFixed(2) + " s, cost " + m.nominal_cost.toFixed(2) : "not balanced"}.` : "";
+  }
+  function loop(now) {
+    const n = cur().x[+ss.value].length;
+    if (playing) { acc += Math.min(0.1, (now - last) / 1000); while (acc >= P.dt) { k = Math.min(k + 1, n - 1); acc -= P.dt } if (k >= n - 1) { k = n - 1 } }
+    last = now; draw(); requestAnimationFrame(loop);
+  }
+  sel.onchange = () => { k = 0; info() }; ss.onchange = () => { k = 0 };
+  document.getElementById("cplay").onclick = e => { playing = !playing; e.target.textContent = playing ? "Pause" : "Play" };
+  document.getElementById("cplay").textContent = playing ? "Pause" : "Play";
+  document.getElementById("creset").onclick = () => { k = 0; playing = true; document.getElementById("cplay").textContent = "Pause" };
+  if (reduced) k = 9999;
+  info(); requestAnimationFrame(loop);
+})();
+
+/* ---------------- results ---------------- */
+function results(M, svgId, tblId, legId) {
+  const rows = Object.entries(M).map(([n, m]) => ({n, ...m}))
+    .sort((a, b) => (b.success_rate - a.success_rate) || ((a.mean_cost ?? 1e9) - (b.mean_cost ?? 1e9)));
+  const fmt = (v, d = 2) => v == null ? "—" : v.toFixed(d);
+  document.getElementById(tblId).innerHTML = `<table><thead><tr><th>Method</th><th>Success</th><th>From rest</th><th>t up [s]</th><th>Cost (rest)</th><th>Cost (mean)</th></tr></thead><tbody>` +
+    rows.map(r => `<tr><td><span class="fam" style="background:${famColor(r.n)}"></span>${r.n}</td><td class="${r.success_rate >= 0.95 ? "ok" : r.success_rate < 0.5 ? "no" : ""}">${Math.round(r.success_rate * 100)}%</td><td>${r.nominal_success ? "yes" : "no"}</td><td>${fmt(r.nominal_t_up)}</td><td>${fmt(r.nominal_cost)}</td><td>${r.success_rate >= 0.5 ? fmt(r.mean_cost) : "—"}</td></tr>`).join("") + `</tbody></table>`;
+  const fams = [...new Set(rows.map(r => FAM[r.n]).filter(Boolean))];
+  document.getElementById(legId).innerHTML = fams.map(f => `<span><span class="fam" style="background:${css("--f-" + f)}"></span>${FAMNAME[f]}</span>`).join("");
+  const ok = rows.filter(r => r.success_rate >= 0.5 && r.mean_cost != null).sort((a, b) => a.mean_cost - b.mean_cost);
+  const svg = document.getElementById(svgId), bh = 20, gap = 6, left = 118, W = 520, H = ok.length * (bh + gap) + 24;
+  const vmax = Math.max(...ok.map(r => r.mean_cost)) * 1.25;
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`); svg.style.width = "100%";
+  svg.innerHTML = ok.map((r, i) => { const y = i * (bh + gap), w = (r.mean_cost / vmax) * (W - left - 10);
+    return `<text x="${left - 8}" y="${y + bh * 0.72}" text-anchor="end">${r.n}</text><rect x="${left}" y="${y}" width="${w}" height="${bh}" rx="3" fill="${famColor(r.n)}"></rect><text x="${left + w + 6}" y="${y + bh * 0.72}">${r.mean_cost.toFixed(2)} · ${Math.round(r.success_rate * 100)}%</text>` }).join("") +
+    `<text x="${left}" y="${H - 4}">mean cost over 20 starts (lower is better) · methods with ≥50% success</text>`;
+}
+results(DATA.pendulum.metrics, "bar-p", "tbl-p", "leg1");
+results(DATA.cartpole.metrics, "bar-c", "tbl-c", "leg2");
+</script>

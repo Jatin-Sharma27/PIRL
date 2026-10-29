@@ -1,0 +1,15 @@
+{
+ "success_rate": 1.0,
+ "nominal_success": true,
+ "nominal_t_up": 1.84,
+ "mean_t_up": 1.7130000000000003,
+ "nominal_cost": 3.155622818870927,
+ "mean_cost": 2.3081366236055247,
+ "mean_abs_u": 0.09745870443825455,
+ "saturation_frac": 0.03816666666666667,
+ "ms_per_step": 0.16719379166655318,
+ "selected": "best checkpoint by evaluation",
+ "train_wall_s": 3473.276914834976,
+ "timesteps": 5000000,
+ "device": "cpu"
+}
