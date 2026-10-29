@@ -296,3 +296,9 @@ parked it at |θ| ≈ 0.19–0.32 rad.
 
 **Status: complete.** Possible next steps: real-hardware trial of the PPO LUT; multi-seed runs for error
 bars; a physics-informed critic that scales to 4-D (e.g. anchor only in a local region).
+
+### Progress saved (2026-10-30)
+- Local git repository initialised in `C:\Users\J\Desktop\PIRL` (branch `main`, repo-local author
+  Jatin Sharma). Ignored: `.venv/`, `__pycache__/`, `logs/`, PDFs. `.gitattributes` keeps `*.sh`,
+  `*.sbatch`, `*.ino`, `*.h` with LF line endings so the HPC scripts never get CRLF.
+- Mirror of code + results on HPC: `~/PIRL`. CPU-only venv for SB3: `D:\PIRL_envs\venv-cpu`.
