@@ -55,6 +55,12 @@ discounted cost** ∫ e^{−ρt} [q_θ(1−cos θ) + q_ω ω² (+ q_p p² + q_v 
 5. **Sim-to-real check before flashing.** Encoder quantisation, EMA velocity, one-sample delay, 8-bit PWM
    and torque noise are simulated on the exact int8 table the ESP32 runs.
 
+## Hardware demo
+
+[![Pendulum balancing on real hardware](media/hardware_balance.gif)](media/hardware_balance.mp4)
+
+The learned policy running on the physical pendulum. An ESP32 holds the policy as a hash-map lookup table and handles encoder reading and PWM motor control. It holds the pendulum upright with some visible wobble. The hardware-in-the-loop study below was used to look into that wobble. [Full video](media/hardware_balance.mp4)
+
 ## Results
 
 Interactive simulation: `results/PIRL_sim.html`. It runs the pendulum live with every trained controller
