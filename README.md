@@ -59,7 +59,7 @@ discounted cost** ∫ e^{−ρt} [q_θ(1−cos θ) + q_ω ω² (+ q_p p² + q_v 
 
 [![Pendulum balancing on real hardware](media/hardware_balance.gif)](media/hardware_balance.mp4)
 
-The learned policy running on the physical pendulum. An ESP32 holds the policy as a hash-map lookup table and handles encoder reading and PWM motor control. It holds the pendulum upright with some visible wobble. The hardware-in-the-loop study below was used to look into that wobble. [Full video](media/hardware_balance.mp4)
+A learned policy balancing the physical pendulum, with some wobble. The ESP32 stores the policy as a hash-map lookup table and handles encoder reading and PWM motor control. [Full video](media/hardware_balance.mp4)
 
 ## Results
 
